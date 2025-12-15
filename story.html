@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>中文故事生成器（升级版）</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 40px;
+    }
+    .box {
+      max-width: 700px;
+      background: white;
+      padding: 30px;
+      margin: auto;
+      border-radius: 8px;
+    }
+    h1 { margin-top: 0; }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    button { margin-top: 20px; cursor: pointer; }
+    .result {
+      white-space: pre-wrap;
+      background: #f0f0f0;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>中文故事生成器（升级版）</h1>
+  <p>输入世界风格、主角身份与关键词，生成随机故事概要。</p>
+
+  <input id="world" placeholder="世界风格（如：黑暗奇幻、奇幻、现代）">
+  <input id="hero" placeholder="主角身份（如：冒险者、魔法师、学生）">
+  <input id="keywords" placeholder="关键词（可选，如：复仇、友情、诅咒）">
+
+  <button onclick="generateStory()">✨ 生成故事</button>
+
+  <div id="output" class="result"></div>
+</div>
+
+<script>
+function getRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generateStory() {
+  const world = document.getElementById("world").value || "未知世界";
+  const hero = document.getElementById("hero").value || "神秘角色";
+  const keywords = document.getElementById("keywords").value || "命运";
+
+  const names = ["艾琳", "莱昂", "瑟菲", "艾尔瑟", "诺亚", "米拉"];
+  const races = ["人类", "精灵", "矮人", "兽人", "魔族", "半精灵"];
+  const classes = ["魔法学徒", "冒险者", "骑士", "刺客", "召唤师", "炼金术士"];
+  const conflicts = [
+    "内心对未知的恐惧",
+    "面对强大敌人时的挣扎",
+    "友情与信任的考验",
+    "命运的诅咒",
+    "无法控制的力量"
+  ];
+
+  const name = getRandom(names);
+  const race = getRandom(races);
+  const cls = getRandom(classes);
+  const conflict1 = getRandom(conflicts);
+  const conflict2 = getRandom(conflicts.filter(c => c !== conflict1));
+
+  const story = 
+`故事标题：${world}冒险记
+
+主角姓名及身份：${name}，${race}·${cls}
+
+背景设定：出生在${world}的一个小镇，父母神秘失踪
+
+主线剧情：
+- 起因：${name}发现父母留下的神秘卷轴
+- 经过：卷轴引导她踏上寻找真相的冒险
+- 高潮：与黑暗势力正面交锋，揭开父母失踪真相
+- 结局：击败黑暗势力，成长为独当一面的勇者
+
+冲突/挑战：
+- ${conflict1}
+- ${conflict2}
+- 关键词：${keywords}
+`;
+
+  document.getElementById("output").innerText = story;
+}
+</script>
+
+</body>
+</html>
